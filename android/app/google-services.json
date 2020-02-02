@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "217099540352",
+    "firebase_url": "https://potholechallenge-93d97.firebaseio.com",
+    "project_id": "potholechallenge-93d97",
+    "storage_bucket": "potholechallenge-93d97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:217099540352:android:80af074add67e5b3c65365",
+        "android_client_info": {
+          "package_name": "falcons.pothole_challenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217099540352-uuteempq1hqqmlne439hf3v9jb56eo0l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeuQ_zjpIzEGNctHWaLGAlWXc_HMmgM_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217099540352-uuteempq1hqqmlne439hf3v9jb56eo0l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pothole_challenge/Auth/redirector.dart.dart';
 import 'package:pothole_challenge/temp.dart';
+
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -21,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Temp(),
+            builder: (context) => Redirect(),
           ),
         );
       },
