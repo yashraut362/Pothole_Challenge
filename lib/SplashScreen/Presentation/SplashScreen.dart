@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pothole_challenge/Auth/redirector.dart';
+import 'package:pothole_challenge/Authentication/redirector.dart';
+import 'package:pothole_challenge/BottomNavBar/BottomBar.dart';
 import 'package:pothole_challenge/temp.dart';
 
 
