@@ -31,7 +31,7 @@ class _BottomBarState extends State<BottomBar> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-              icon: new Icon(Icons.home), title: new Text('BottomBar')),
+              icon: new Icon(Icons.home), title: new Text('Home')),
           BottomNavigationBarItem(
               icon: new Icon(Icons.map), title: new Text('Map')),
           BottomNavigationBarItem(
