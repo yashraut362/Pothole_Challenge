@@ -2,9 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pothole_challenge/Authentication/redirector.dart';
-import 'package:pothole_challenge/BottomNavBar/BottomBar.dart';
+
+import '../../Authentication/pages/root_page.dart';
+import '../../Authentication/services/authentication.dart';
 
 class SplashScreen extends StatefulWidget {
+   static const String id ='SplashScreen';
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -22,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => BottomBar(),
+            builder: (context) => new RootPage(auth: new Auth()),
           ),
         );
       },

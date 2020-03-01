@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:pothole_challenge/SplashScreen/Presentation/SplashScreen.dart';
+import 'SplashScreen/Presentation/SplashScreen.dart';
 
 void main() => runApp(MyApp());
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: SplashScreen(),
-      ),
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Navigation',
+      initialRoute: SplashScreen.id,
+      routes: {
+        SplashScreen.id: (context) => SplashScreen(),
+      },
     );
   }
 }
