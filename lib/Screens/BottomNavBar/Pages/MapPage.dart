@@ -1,56 +1,64 @@
-import 'dart:math';
+import 'dart:async';
+import 'package:permission/permission.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapPage extends StatefulWidget {
-  MapPage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _MapPageState createState() => _MapPageState();
 }
 
 class _MapPageState extends State<MapPage> {
-  GoogleMapController _controller;
+  Completer<GoogleMapController> _controller = Completer();
 
-  final CameraPosition _initialPosition =
-      CameraPosition(target: LatLng(24.903623, 67.198367));
+  static final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(25.3005699, 74.7780242),
+    zoom: 10,
+  );
 
-  final List<Marker> markers = [];
-
-  addMarker(cordinate) {
-    int id = Random().nextInt(100);
-
-    setState(() {
-      markers
-          .add(Marker(position: cordinate, markerId: MarkerId(id.toString())));
-    });
+  @override
+  void initState() {
+    // TODO: implement initState
+    getPermission();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new Scaffold(
       body: GoogleMap(
-        initialCameraPosition: _initialPosition,
         mapType: MapType.normal,
-        onMapCreated: (controller) {
-          setState(() {
-            _controller = controller;
-          });
+        myLocationButtonEnabled: true,
+        myLocationEnabled: true,
+        initialCameraPosition: _kGooglePlex,
+        markers: {
+          Marker1,
         },
-        markers: markers.toSet(),
-        onTap: (cordinate) {
-          _controller.animateCamera(CameraUpdate.newLatLng(cordinate));
-          addMarker(cordinate);
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _controller.animateCamera(CameraUpdate.zoomOut());
-        },
-        child: Icon(Icons.zoom_out),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        onPressed: () {},
+        child: Icon(Icons.location_searching),
+      ),
     );
+  }
+
+  Marker Marker1 = Marker(
+    markerId: MarkerId('gramercy'),
+    position: LatLng(19.124665, 72.822413),
+    infoWindow: InfoWindow(title: 'Washroom ', snippet: "Public "),
+    icon: BitmapDescriptor.defaultMarkerWithHue(
+      BitmapDescriptor.hueRed,
+    ),
+  );
+
+  getPermission() async {
+    var permissions =
+        await Permission.getPermissionsStatus([PermissionName.Location]);
+    var permissionNames =
+        await Permission.requestPermissions([PermissionName.Location]);
+    Permission.openSettings;
   }
 }
