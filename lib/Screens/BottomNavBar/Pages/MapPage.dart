@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'dart:async';
-import 'package:permission/permission.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapPage extends StatefulWidget {
@@ -9,56 +10,105 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  Completer<GoogleMapController> _controller = Completer();
+  Completer<GoogleMapController> controller1;
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(25.3005699, 74.7780242),
-    zoom: 10,
-  );
+  //static LatLng _center = LatLng(-15.4630239974464, 28.363397732282127);
+  static LatLng _initialPosition;
+  final Set<Marker> _markers = {};
+  static LatLng _lastMapPosition = _initialPosition;
 
   @override
   void initState() {
-    // TODO: implement initState
-    getPermission();
     super.initState();
+    _getUserLocation();
+  }
+
+  void _getUserLocation() async {
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    List<Placemark> placemark = await Geolocator()
+        .placemarkFromCoordinates(position.latitude, position.longitude);
+    setState(() {
+      _initialPosition = LatLng(position.latitude, position.longitude);
+      print('${placemark[0].name}');
+    });
+  }
+
+  _onMapCreated(GoogleMapController controller) {
+    setState(() {
+      controller1.complete(controller);
+    });
+  }
+
+  MapType _currentMapType = MapType.normal;
+
+  void _onMapTypeButtonPressed() {
+    setState(() {
+      _currentMapType = _currentMapType == MapType.normal
+          ? MapType.satellite
+          : MapType.normal;
+    });
+  }
+
+  _onCameraMove(CameraPosition position) {
+    _lastMapPosition = position.target;
+  }
+
+  Widget mapButton(Function function, Icon icon, Color color) {
+    return RawMaterialButton(
+      onPressed: function,
+      child: icon,
+      shape: new CircleBorder(),
+      elevation: 2.0,
+      fillColor: color,
+      padding: const EdgeInsets.all(7.0),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        myLocationButtonEnabled: true,
-        myLocationEnabled: true,
-        initialCameraPosition: _kGooglePlex,
-        markers: {
-          Marker1,
-        },
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.location_searching),
-      ),
+    return Scaffold(
+      body: _initialPosition == null
+          ? Container(
+              child: Center(
+                child: Text(
+                  'loading map..',
+                  style: TextStyle(
+                      fontFamily: 'Avenir-Medium', color: Colors.grey[400]),
+                ),
+              ),
+            )
+          : Container(
+              child: Stack(
+                children: <Widget>[
+                  GoogleMap(
+                    markers: _markers,
+                    mapType: _currentMapType,
+                    initialCameraPosition: CameraPosition(
+                      target: _initialPosition,
+                      zoom: 14.4746,
+                    ),
+                    onMapCreated: _onMapCreated,
+                    zoomGesturesEnabled: true,
+                    onCameraMove: _onCameraMove,
+                    myLocationEnabled: true,
+                    compassEnabled: true,
+                    myLocationButtonEnabled: false,
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                        margin: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+                        child: Column(
+                          children: <Widget>[
+                            mapButton(_onMapTypeButtonPressed,
+                                Icon(Icons.filter_hdr), Color(0xff46b3e6)),
+                          ],
+                        )),
+                  )
+                ],
+              ),
+            ),
     );
-  }
-
-  Marker Marker1 = Marker(
-    markerId: MarkerId('gramercy'),
-    position: LatLng(19.124665, 72.822413),
-    infoWindow: InfoWindow(title: 'Washroom ', snippet: "Public "),
-    icon: BitmapDescriptor.defaultMarkerWithHue(
-      BitmapDescriptor.hueRed,
-    ),
-  );
-
-  getPermission() async {
-    var permissions =
-        await Permission.getPermissionsStatus([PermissionName.Location]);
-    var permissionNames =
-        await Permission.requestPermissions([PermissionName.Location]);
-    Permission.openSettings;
   }
 }
