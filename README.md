@@ -1,6 +1,6 @@
-# pothole_challenge
+# pothole
 
-Pothole Detection and reporting System 
+A new Flutter project.
 
 ## Getting Started
 

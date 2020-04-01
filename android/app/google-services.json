@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:217099540352:android:25ae5d91d79ba81ac65365",
+        "android_client_info": {
+          "package_name": "com.androX.pothole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "217099540352-uuteempq1hqqmlne439hf3v9jb56eo0l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeuQ_zjpIzEGNctHWaLGAlWXc_HMmgM_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "217099540352-uuteempq1hqqmlne439hf3v9jb56eo0l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:217099540352:android:80af074add67e5b3c65365",
         "android_client_info": {
           "package_name": "falcons.pothole_challenge"

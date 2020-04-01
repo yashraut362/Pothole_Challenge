@@ -1,5 +1,5 @@
-name: pothole_challenge
-description: Pothole Detection and reporting System 
+name: pothole
+description: A new Flutter project.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -20,17 +20,19 @@ dependencies:
   flutter:
     sdk: flutter
 
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^0.1.3
   splashscreen: ^1.2.0
   firebase_auth: ^0.15.4
   firebase_database: ^3.1.1
+  auto_size_text: ^2.1.0
+  cloud_firestore: ^0.13.4+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -48,7 +50,6 @@ flutter:
    - assets/SplashScreen/road.png
    - assets/Auth/auth.png
    - assets/HomePage/
-  #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
