@@ -9,6 +9,11 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="pothole"
         android:icon="@mipmap/ic_launcher">
+
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyDihkYLXcVq4fwdIABseDGAC-JLA2qQe_c"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

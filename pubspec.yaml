@@ -29,6 +29,13 @@ dependencies:
   firebase_database: ^3.1.1
   auto_size_text: ^2.1.0
   cloud_firestore: ^0.13.4+1
+  google_maps_flutter: ^0.5.25+2
+  google_maps_webservice: ^0.0.14
+  location: ^2.3.5
+  geoflutterfire: ^2.1.0
+  geolocator: ^5.3.0
+  geocoder: ^0.2.1
+  permission: ^0.1.7
 
 dev_dependencies:
   flutter_test:
