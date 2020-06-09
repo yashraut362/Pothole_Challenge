@@ -76,7 +76,7 @@ class _CardsState extends State<Cards> {
                   child: Center(
                     child: RichText(
                       text: TextSpan(
-                        text: "Status of Report",
+                        text: "Status of all reports",
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
