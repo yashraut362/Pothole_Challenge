@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '../services/auth_service.dart';
 import '../widgets/providerWidget.dart';
 
-final primaryColor = Colors.blue;
+final primaryColor = Colors.amber;
 
 enum AuthForm { signin, signup, reset }
 

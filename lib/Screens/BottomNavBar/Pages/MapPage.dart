@@ -68,6 +68,14 @@ class _MapPageState extends State<MapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Map",
+          style: TextStyle(color: Colors.amber),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+      ),
       body: _initialPosition == null
           ? Container(
               child: Center(
@@ -98,13 +106,14 @@ class _MapPageState extends State<MapPage> {
                   Align(
                     alignment: Alignment.topRight,
                     child: Container(
-                        margin: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
-                        child: Column(
-                          children: <Widget>[
-                            mapButton(_onMapTypeButtonPressed,
-                                Icon(Icons.filter_hdr), Color(0xff46b3e6)),
-                          ],
-                        )),
+                      margin: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+                      child: Column(
+                        children: <Widget>[
+                          mapButton(_onMapTypeButtonPressed,
+                              Icon(Icons.filter_hdr), Colors.amber),
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),

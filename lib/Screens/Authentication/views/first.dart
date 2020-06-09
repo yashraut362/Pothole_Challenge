@@ -3,7 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '../widgets/customDialog.dart';
 
 class First extends StatelessWidget {
-  final primaryColor = const Color(0xFF75A2EA);
+  final primaryColor = const Color(0xFFffbf00);
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +20,14 @@ class First extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: <Widget>[
-                SizedBox(height: _height * 0.10),
                 Text(
                   "Welcome",
                   style: TextStyle(fontSize: 44, color: Colors.white),
                 ),
-                SizedBox(height: _height * 0.10),
+                Image.asset(
+                  'assets/Auth/auth.png',
+                  height: _height * 0.40,
+                ),
                 AutoSizeText(
                   "Let’s start scouting potholes",
                   maxLines: 2,
@@ -35,7 +37,7 @@ class First extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: _height * 0.2),
+                SizedBox(height: _height * 0.05),
                 RaisedButton(
                   color: Colors.white,
                   shape: RoundedRectangleBorder(
@@ -67,7 +69,7 @@ class First extends StatelessWidget {
                     );
                   },
                 ),
-                SizedBox(height: _height * 0.1),
+                SizedBox(height: _height * 0.05),
                 Divider(
                   thickness: 0.8,
                   color: Colors.white,

@@ -11,65 +11,127 @@ class Cards extends StatefulWidget {
 class _CardsState extends State<Cards> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xffdff6f0),
-      child: Card(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => NewComplaint()),
-                );
-              },
-              child: Container(
-                color: Color(0xff4d80e4),
-                child: const ListTile(
-                  leading: Icon(Icons.add_location),
-                  title: Text('Report new complaint'),
-                  subtitle: Text('You can add new complaint by tapping here'),
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NewComplaint()),
+            );
+          },
+          child: Container(
+            height: 120,
+            child: Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 160),
+                  height: 120,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.amber[200], Colors.amber],
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Report New Complaint",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                color: Color(0xff4d80e4),
-                child: const ListTile(
-                  leading: Icon(Icons.time_to_leave),
-                  title: Text('Status of complaint'),
-                  subtitle:
-                      Text('Here you can see status About Your New Complaint'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Image.asset('assets/HomePage/report.png'),
                 ),
-              ),
+              ],
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                color: Color(0xff4d80e4),
-                child: const ListTile(
-                  leading: Icon(Icons.near_me),
-                  title: Text('Nearby Complaints'),
-                  subtitle: Text('Here You can see all nearby complaint'),
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                color: Color(0xff4d80e4),
-                child: const ListTile(
-                  leading: Icon(Icons.check_box_outline_blank),
-                  title: Text('FAQ'),
-                  subtitle: Text('All Frequently Asked Question are here '),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
+        SizedBox(height: 20),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            height: 120,
+            child: Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 160),
+                  height: 120,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.amber[200], Colors.amber],
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Status of Report",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Image.asset('assets/HomePage/status.png'),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: 20),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            height: 120,
+            child: Stack(
+              alignment: Alignment.bottomLeft,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(left: 160),
+                  height: 120,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.amber[200], Colors.amber],
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Center(
+                    child: RichText(
+                      text: TextSpan(
+                        text: "FAQ",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17.0),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Image.asset('assets/HomePage/FAQ.png'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

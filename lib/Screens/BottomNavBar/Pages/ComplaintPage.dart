@@ -16,7 +16,28 @@ class _ComplaintPageState extends State<ComplaintPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Cards(),
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text(
+            "HomePage",
+            style: TextStyle(color: Colors.amber),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: 250,
+              child: Image.asset('assets/HomePage/home.png'),
+            ),
+            Expanded(
+              child: Cards(),
+            )
+          ],
+        ),
+        // body: Cards(),
       ),
     );
   }

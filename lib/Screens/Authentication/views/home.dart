@@ -28,46 +28,46 @@ class _HomeState extends State<Home> {
     final _height = MediaQuery.of(context).size.height;
     const PrimaryColor = const Color(0xFF2e279d);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: PrimaryColor,
-        title: Text('HomePage'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.exit_to_app),
-            onPressed: () async {
-              try {
-                AuthService auth = Provider.of(context).auth;
-                await auth.signOut();
-              } catch (e) {
-                print(e);
-              }
-            },
-          ),
-        ],
-      ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-              icon: new Icon(
-                Icons.home,
-                color: Color(0xff2e279d),
+            icon: new Icon(
+              Icons.home,
+              color: Color(0xfff0a500),
+            ),
+            title: new Text(
+              'Home',
+              style: TextStyle(
+                color: Color(0xfff0a500),
               ),
-              title: new Text('Home')),
+            ),
+          ),
           BottomNavigationBarItem(
               icon: new Icon(
                 Icons.map,
-                color: Color(0xff2e279d),
+                color: Color(0xfff0a500),
               ),
-              title: new Text('Map')),
+              title: new Text(
+                'Map',
+                style: TextStyle(
+                  color: Color(0xfff0a500),
+                ),
+              )),
           BottomNavigationBarItem(
-              icon: new Icon(
-                Icons.person,
-                color: Color(0xff2e279d),
+            icon: new Icon(
+              Icons.person,
+              color: Color(0xfff0a500),
+            ),
+            title: new Text(
+              'Account',
+              style: TextStyle(
+                color: Color(0xfff0a500),
               ),
-              title: new Text('Account'))
+            ),
+          )
         ],
       ),
     );

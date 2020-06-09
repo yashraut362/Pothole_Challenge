@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 class CustomDialog extends StatelessWidget {
-  final primaryColor = const Color(0xFF75A2EA);
+  final primaryColor = const Color(0xFFffbf00);
   final grayColor = const Color(0xFF939393);
 
   final String title,
@@ -38,9 +38,9 @@ class CustomDialog extends StatelessWidget {
                 borderRadius: BorderRadius.circular(padding),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black,
+                    color: Colors.amberAccent,
                     blurRadius: 10.0,
-                    offset: const Offset(0.0, 10.0),
+                    offset: const Offset(0.0, 0.0),
                   ),
                 ]),
             child: Column(
@@ -78,7 +78,7 @@ class CustomDialog extends StatelessWidget {
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.w200,
+                        fontWeight: FontWeight.w800,
                         color: Colors.white,
                       ),
                     ),
