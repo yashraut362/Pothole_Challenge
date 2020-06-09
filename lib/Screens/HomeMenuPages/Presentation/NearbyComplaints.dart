@@ -2,7 +2,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:geocoder/geocoder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NearbyComplaint extends StatefulWidget {
   @override
@@ -10,6 +10,8 @@ class NearbyComplaint extends StatefulWidget {
 }
 
 class _NearbyComplaintState extends State<NearbyComplaint> {
+  final _firestore = Firestore.instance;
+
   String _username,
       _email,
       _potholetype,
@@ -18,6 +20,20 @@ class _NearbyComplaintState extends State<NearbyComplaint> {
       _landmark,
       _comment;
   int _phonenum;
+
+  void uploadform() {
+    _firestore.collection('reports').add({
+      'username': _username,
+      'email': _email,
+      'potholetype': _potholetype,
+      'department': _department,
+      'address': _address,
+      'landmark': _landmark,
+      'comment': _comment,
+      'phonenum': _phonenum,
+    });
+  }
+
   final _formKey = GlobalKey<FormState>();
 
   FocusNode _usernameFocusNode = FocusNode();
@@ -35,30 +51,49 @@ class _NearbyComplaintState extends State<NearbyComplaint> {
       appBar: AppBar(
         title: Text("Input Validation"),
       ),
-      body: HomePageBody(),
-    );
-  }
-
-  Widget HomePageBody() {
-    return Container(
-      padding: EdgeInsets.all(16),
-      child: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              PotholeType(),
-              Department(),
-              Address(),
-              Landmark(),
-              Comment(),
-              NameInput(),
-              EmailInput(),
-                 Phonenum(),
-              SubmitButton()
-            ],
+      body: ListView(
+        children: [
+          Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                PotholeType(),
+                SizedBox(
+                  height: 10,
+                ),
+                Department(),
+                SizedBox(
+                  height: 10,
+                ),
+                Address(),
+                SizedBox(
+                  height: 10,
+                ),
+                Landmark(),
+                SizedBox(
+                  height: 10,
+                ),
+                Comment(),
+                SizedBox(
+                  height: 10,
+                ),
+                NameInput(),
+                SizedBox(
+                  height: 10,
+                ),
+                EmailInput(),
+                SizedBox(
+                  height: 10,
+                ),
+                Phonenum(),
+                SizedBox(
+                  height: 10,
+                ),
+                SubmitButton(),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -229,27 +264,14 @@ class _NearbyComplaintState extends State<NearbyComplaint> {
 
   Widget Phonenum() {
     return TextFormField(
-      focusNode: _phonenumFocusNode,
-      autofocus: true,
-      textCapitalization: TextCapitalization.words,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        labelText: "Username",
-        hintText: "e.g Morgan",
-      ),
-      textInputAction: TextInputAction.next,
-      validator: (number) {
-        Pattern pattern = r'^([0]|\+91)?[789]\d{9}$';
-        RegExp regex = new RegExp(pattern);
-        if (!regex.hasMatch(number))
-          return 'Invalid username';
-        else
-          return null;
+      decoration: new InputDecoration(labelText: "Enter your number"),
+      keyboardType: TextInputType.number,
+      onChanged: (value) {
+        _phonenum = int.parse(value);
       },
-      onSaved: (number) => _phonenum = number as int,
-      onFieldSubmitted: (_) {
-        fieldFocusChange(context, _phonenumFocusNode, _emailFocusNode);
-      },
+      inputFormatters: <TextInputFormatter>[
+        WhitelistingTextInputFormatter.digitsOnly
+      ], // Only numbers can be entered
     );
   }
 
@@ -262,6 +284,8 @@ class _NearbyComplaintState extends State<NearbyComplaint> {
           toastMessage(
               "Username: $_username\nEmail: $_email\nPotholetype:$_potholetype\nDepartment:$_department\nAddress:$_address\nLandmark:$_landmark\nComment:$_comment\nPhoneno:$_phonenum");
         }
+        uploadform();
+        print("Yash");
       },
       child: Text(
         "Submit",
