@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
 import '../services/auth_service.dart';
 import '../widgets/providerWidget.dart';
 
@@ -14,7 +13,8 @@ class CitizenSignup extends StatefulWidget {
   CitizenSignup({Key key, @required this.authFormType}) : super(key: key);
 
   @override
-  _CitizenSignupState createState() => _CitizenSignupState(authFormType: this.authFormType);
+  _CitizenSignupState createState() =>
+      _CitizenSignupState(authFormType: this.authFormType);
 }
 
 class _CitizenSignupState extends State<CitizenSignup> {
@@ -67,7 +67,7 @@ class _CitizenSignupState extends State<CitizenSignup> {
               _email, _password, _name);
           print("Signed up with new ID $uid");
           String _role = "Citizen";
-        UserManagement().storeNewUser(_email, uid, _role ,context);
+          UserManagement().storeNewUser(_email, uid, _role, context);
         }
         Navigator.of(context).pushReplacementNamed("/home");
       } catch (e) {
@@ -138,7 +138,7 @@ class _CitizenSignupState extends State<CitizenSignup> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left:  8.0),
+              padding: const EdgeInsets.only(left: 8.0),
               child: IconButton(
                 icon: Icon(Icons.close),
                 onPressed: () {

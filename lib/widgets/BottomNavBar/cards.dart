@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pothole/Screens/BottomNavBar/Pages/ComplaintPage.dart';
+import 'package:pothole/Screens/HomeMenuPages/Presentation/NearbyComplaints.dart';
 import '../../Routes/routeGenerator.dart';
 import '../../Screens/HomeMenuPages/Presentation/NewComplaint.dart';
 
@@ -17,7 +18,7 @@ class _CardsState extends State<Cards> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => NewComplaint()),
+              MaterialPageRoute(builder: (context) => NearbyComplaint()),
             );
           },
           child: Container(
