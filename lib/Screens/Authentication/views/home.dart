@@ -24,9 +24,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final _width = MediaQuery.of(context).size.width;
-    final _height = MediaQuery.of(context).size.height;
-    const PrimaryColor = const Color(0xFF2e279d);
     return Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -34,9 +31,17 @@ class _HomeState extends State<Home> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(
-              Icons.home,
-              color: Color(0xfff0a500),
+            activeIcon: new Tab(
+              icon: new Image.asset(
+                "assets/Navbar/home.png",
+                height: 32,
+              ),
+            ),
+            icon: new Tab(
+              icon: new Image.asset(
+                "assets/Navbar/home.png",
+                height: 22,
+              ),
             ),
             title: new Text(
               'Home',
@@ -46,9 +51,17 @@ class _HomeState extends State<Home> {
             ),
           ),
           BottomNavigationBarItem(
-              icon: new Icon(
-                Icons.map,
-                color: Color(0xfff0a500),
+              activeIcon: new Tab(
+                icon: new Image.asset(
+                  "assets/Navbar/map.png",
+                  height: 32,
+                ),
+              ),
+              icon: new Tab(
+                icon: new Image.asset(
+                  "assets/Navbar/map.png",
+                  height: 22,
+                ),
               ),
               title: new Text(
                 'Map',
@@ -57,9 +70,17 @@ class _HomeState extends State<Home> {
                 ),
               )),
           BottomNavigationBarItem(
-            icon: new Icon(
-              Icons.person,
-              color: Color(0xfff0a500),
+            activeIcon: new Tab(
+              icon: new Image.asset(
+                "assets/Navbar/user.png",
+                height: 32,
+              ),
+            ),
+            icon: new Tab(
+              icon: new Image.asset(
+                "assets/Navbar/user.png",
+                height: 22,
+              ),
             ),
             title: new Text(
               'Account',
