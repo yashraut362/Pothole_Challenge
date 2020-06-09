@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:location/location.dart';
 
 class NearbyComplaint extends StatefulWidget {
   @override
@@ -11,6 +13,8 @@ class NearbyComplaint extends StatefulWidget {
 
 class _NearbyComplaintState extends State<NearbyComplaint> {
   final _firestore = Firestore.instance;
+  Geoflutterfire geo = Geoflutterfire();
+  Location location = new Location();
 
   String _username,
       _email,
@@ -21,9 +25,13 @@ class _NearbyComplaintState extends State<NearbyComplaint> {
       _comment;
   int _phonenum;
 
-  void uploadform() {
+  void uploadform() async {
+    var pos = await location.getLocation();
+    GeoFirePoint point =
+        geo.point(latitude: pos.latitude, longitude: pos.longitude);
     _firestore.collection('reports').add({
       'username': _username,
+      'position': point.data,
       'email': _email,
       'potholetype': _potholetype,
       'department': _department,
