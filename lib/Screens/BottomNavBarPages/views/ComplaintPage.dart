@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/cards.dart';
 
-
 class ComplaintPage extends StatefulWidget {
   @override
   _ComplaintPageState createState() => _ComplaintPageState();
@@ -25,9 +24,11 @@ class _ComplaintPageState extends State<ComplaintPage> {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: 250,
-              child: Image.asset('assets/HomePage/home.png'),
+            Center(
+              child: Container(
+                height: 200,
+                child: Image.asset('assets/HomePage/home.png'),
+              ),
             ),
             Expanded(
               child: Cards(),
