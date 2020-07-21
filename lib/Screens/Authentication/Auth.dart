@@ -27,6 +27,7 @@ class Authentication extends StatelessWidget {
           '/home': (BuildContext context) => HomeController(),
           '/citizenSignup': (BuildContext context) =>
               CitizenSignup(authFormType: AuthForm.signup),
+          
         },
       ),
     );

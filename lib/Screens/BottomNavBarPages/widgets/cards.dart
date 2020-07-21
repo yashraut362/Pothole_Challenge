@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:pothole/Screens/HomeMenuPages/Presentation/NearbyComplaints.dart';
-
+import 'package:pothole/Screens/HomeMenuPages/views/ComplaintForm.dart';
+import 'package:pothole/Screens/HomeMenuPages/views/SelectionPage.dart';
 
 class Cards extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _CardsState extends State<Cards> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => NearbyComplaint()),
+              MaterialPageRoute(builder: (context) => SelectionPage()),
             );
           },
           child: Container(

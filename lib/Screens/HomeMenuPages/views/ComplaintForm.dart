@@ -6,12 +6,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:location/location.dart';
 
-class NearbyComplaint extends StatefulWidget {
+class ComplaintForm extends StatefulWidget {
   @override
-  _NearbyComplaintState createState() => _NearbyComplaintState();
+  _ComplaintFormState createState() => _ComplaintFormState();
 }
 
-class _NearbyComplaintState extends State<NearbyComplaint> {
+class _ComplaintFormState extends State<ComplaintForm> {
   final _firestore = Firestore.instance;
   Geoflutterfire geo = Geoflutterfire();
   Location location = new Location();

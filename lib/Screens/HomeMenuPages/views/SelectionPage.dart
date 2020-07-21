@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class NewComplaint extends StatefulWidget {
+class SelectionPage extends StatefulWidget {
   @override
-  _NewComplaintState createState() => _NewComplaintState();
+  _SelectionPageState createState() => _SelectionPageState();
 }
 
-class _NewComplaintState extends State<NewComplaint> {
+class _SelectionPageState extends State<SelectionPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
