@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pothole/Screens/BottomNavBar/Pages/ComplaintPage.dart';
+
 import 'package:pothole/Screens/HomeMenuPages/Presentation/NearbyComplaints.dart';
-import '../../Routes/routeGenerator.dart';
-import '../../Screens/HomeMenuPages/Presentation/NewComplaint.dart';
+
 
 class Cards extends StatefulWidget {
   @override

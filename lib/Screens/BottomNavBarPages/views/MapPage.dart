@@ -31,7 +31,7 @@ class _MapPageState extends State<MapPage> {
         .placemarkFromCoordinates(position.latitude, position.longitude);
     setState(() {
       _initialPosition = LatLng(position.latitude, position.longitude);
-      print('${placemark[0].name}');
+      // print('${placemark[0].name}');
     });
   }
 

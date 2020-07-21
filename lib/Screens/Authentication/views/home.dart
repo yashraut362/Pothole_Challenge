@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../BottomNavBar/Pages/ComplaintPage.dart';
-import '../../BottomNavBar/Pages/MapPage.dart';
-import '../../BottomNavBar/Pages/ThirdPage.dart';
+import '../../BottomNavBarPages/views/ComplaintPage.dart';
+import '../../BottomNavBarPages/views/MapPage.dart';
+import '../../BottomNavBarPages/views/AccountPage.dart';
 
 import '../services/auth_service.dart';
 import '../widgets/providerWidget.dart';
@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
 
-  final List<Widget> _children = [ComplaintPage(), MapPage(), ThirdPage()];
+  final List<Widget> _children = [ComplaintPage(), MapPage(), AccountPage()];
 
   void onTabTapped(int index) {
     setState(() {

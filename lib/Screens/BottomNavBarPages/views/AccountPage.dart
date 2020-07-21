@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:pothole/Screens/Authentication/services/auth_service.dart';
 import 'package:pothole/Screens/Authentication/widgets/providerWidget.dart';
 
-class ThirdPage extends StatefulWidget {
+class AccountPage extends StatefulWidget {
   @override
-  _ThirdPageState createState() => _ThirdPageState();
+  _AccountPageState createState() => _AccountPageState();
 }
 
-class _ThirdPageState extends State<ThirdPage> {
+class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
