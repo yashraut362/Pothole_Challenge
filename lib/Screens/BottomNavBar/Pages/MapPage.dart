@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -78,12 +79,37 @@ class _MapPageState extends State<MapPage> {
       ),
       body: _initialPosition == null
           ? Container(
-              child: Center(
-                child: Text(
-                  'loading map..',
-                  style: TextStyle(
-                      fontFamily: 'Avenir-Medium', color: Colors.grey[400]),
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: SpinKitCubeGrid(
+                      color: Colors.amber,
+                      size: 80.0,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30.0,
+                  ),
+                  Text(
+                    'Loading...',
+                    style: TextStyle(color: Colors.amber),
+                  ),
+                  SizedBox(
+                    height: 50.0,
+                  ),
+                  Text(
+                    'In case its kept on loading ',
+                    style: TextStyle(color: Colors.amber, fontSize: 20.0),
+                  ),
+                  Text(
+                    'Please Enable Location',
+                    style: TextStyle(
+                        color: Colors.amber,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0),
+                  ),
+                ],
               ),
             )
           : Container(

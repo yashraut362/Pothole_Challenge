@@ -160,6 +160,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.6"
+  flutter_spinkit:
+    dependency: "direct main"
+    description:
+      name: flutter_spinkit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.2+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -363,7 +370,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.15"
+    version: "0.2.16"
   typed_data:
     dependency: transitive
     description:
@@ -379,5 +386,5 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
-  dart: ">=2.7.0-dev <3.0.0"
+  dart: ">=2.7.0 <3.0.0"
   flutter: ">=1.12.13+hotfix.6 <2.0.0"
