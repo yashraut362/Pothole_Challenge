@@ -97,7 +97,12 @@ class _CardsState extends State<Cards> {
           ),
           SizedBox(height: 20),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => FAQScreen()),
+              );
+            },
             child: Container(
               height: 120,
               child: Stack(
@@ -113,22 +118,14 @@ class _CardsState extends State<Cards> {
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => FAQScreen()),
-                        );
-                      },
-                      child: Center(
-                        child: RichText(
-                          text: TextSpan(
-                            text: "FAQ",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17.0),
-                          ),
+                    child: Center(
+                      child: RichText(
+                        text: TextSpan(
+                          text: "FAQ",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17.0),
                         ),
                       ),
                     ),
