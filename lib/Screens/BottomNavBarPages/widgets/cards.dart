@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pothole/Screens/FAQScreen/views/FAQScreen.dart';
 
 import 'package:pothole/Screens/HomeMenuPages/views/ComplaintForm.dart';
 import 'package:pothole/Screens/HomeMenuPages/views/SelectionPage.dart';
@@ -112,14 +113,22 @@ class _CardsState extends State<Cards> {
                       ),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Center(
-                      child: RichText(
-                        text: TextSpan(
-                          text: "FAQ",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => FAQScreen()),
+                        );
+                      },
+                      child: Center(
+                        child: RichText(
+                          text: TextSpan(
+                            text: "FAQ",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17.0),
+                          ),
                         ),
                       ),
                     ),

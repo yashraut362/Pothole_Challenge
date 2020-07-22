@@ -39,6 +39,7 @@ dependencies:
   fluttertoast: ^3.1.3
   email_validator: ^1.0.0
   flutter_spinkit: ^4.1.2+1
+  expansion_tile_card: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,7 @@ flutter:
    - assets/Account/
    - assets/
    - assets/Navbar/
+   - assets/FAQ/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
