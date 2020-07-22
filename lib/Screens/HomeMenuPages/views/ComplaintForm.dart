@@ -1,7 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:location/location.dart';
@@ -43,6 +42,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
       'landmark': _landmark,
       'comment': _comment,
       'phonenum': _phonenum,
+      'work': _work,
     });
   }
 
@@ -54,6 +54,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
       _landmark,
       _comment;
   int _phonenum;
+  bool _work = false;
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +179,9 @@ class _ComplaintFormState extends State<ComplaintForm> {
                         context, _addressFocusNode, _landmarkFocusNode);
                   },
                 ),
-                  SizedBox(height: 20.0,),
+                SizedBox(
+                  height: 20.0,
+                ),
                 TextFormField(
                   focusNode: _landmarkFocusNode,
                   autofocus: true,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pothole/Screens/FAQScreen/views/FAQScreen.dart';
-
-import 'package:pothole/Screens/HomeMenuPages/views/ComplaintForm.dart';
 import 'package:pothole/Screens/HomeMenuPages/views/SelectionPage.dart';
+import 'package:pothole/Screens/StatusAllScreen/views/StatusScreen.dart';
 
 class Cards extends StatefulWidget {
   @override
@@ -59,7 +58,12 @@ class _CardsState extends State<Cards> {
           ),
           SizedBox(height: 20),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => StatusScreen()),
+              );
+            },
             child: Container(
               height: 120,
               child: Stack(

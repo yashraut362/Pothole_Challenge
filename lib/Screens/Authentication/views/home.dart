@@ -3,9 +3,6 @@ import '../../BottomNavBarPages/views/ComplaintPage.dart';
 import '../../BottomNavBarPages/views/MapPage.dart';
 import '../../BottomNavBarPages/views/AccountPage.dart';
 
-import '../services/auth_service.dart';
-import '../widgets/providerWidget.dart';
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();

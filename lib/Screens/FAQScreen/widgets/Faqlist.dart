@@ -13,7 +13,7 @@ class _FaqlistState extends State<Faqlist> {
   @override
   void initState() {
     super.initState();
-    getDriversList().then((results) {
+    getFaqList().then((results) {
       setState(() {
         querySnapshot = results;
       });
