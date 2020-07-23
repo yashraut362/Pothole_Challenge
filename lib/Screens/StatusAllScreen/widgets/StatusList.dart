@@ -10,7 +10,6 @@ class StatusList extends StatefulWidget {
 }
 
 class _StatusListState extends State<StatusList> {
-  List<Map<String, dynamic>> geopos = [];
   @override
   void initState() {
     getStatusList().then((res) {
@@ -30,6 +29,12 @@ class _StatusListState extends State<StatusList> {
         itemCount: querySnapshot.documents.length,
         padding: EdgeInsets.all(12),
         itemBuilder: (context, i) {
+          String lat = querySnapshot
+              .documents[i].data['position']['geopoint'].latitude
+              .toString();
+          String lon = querySnapshot
+              .documents[i].data['position']['geopoint'].longitude
+              .toString();
           return Padding(
             padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
             child: Column(
@@ -86,7 +91,7 @@ class _StatusListState extends State<StatusList> {
                                 height: 5.0,
                               ),
                               Text(
-                                  "Landmark :${querySnapshot.documents[i].data['position']}"),
+                                  "Landmark :${querySnapshot.documents[i].data['position']['geopoint'].latitude.runtimeType}"),
                             ],
                           )),
                     ),
@@ -99,7 +104,7 @@ class _StatusListState extends State<StatusList> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4.0)),
                           onPressed: () {
-                            //      _launchURL();
+                            navigateme(lat, lon);
                           },
                           child: Column(
                             children: <Widget>[
@@ -115,12 +120,7 @@ class _StatusListState extends State<StatusList> {
                         FlatButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4.0)),
-                          onPressed: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(builder: (context) => MapPage()),
-                            // );
-                          },
+                          onPressed: () {},
                           child: Column(
                             children: <Widget>[
                               Icon(Icons.open_in_browser),
