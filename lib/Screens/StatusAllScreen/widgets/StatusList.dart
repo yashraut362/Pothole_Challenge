@@ -56,7 +56,7 @@ class _StatusListState extends State<StatusList> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                          "Department :${querySnapshot.documents[i].data['department']}"),
+                          "${querySnapshot.documents[i].data['department']}"),
                     ],
                   ),
                   children: <Widget>[
@@ -90,8 +90,8 @@ class _StatusListState extends State<StatusList> {
                               SizedBox(
                                 height: 5.0,
                               ),
-                              Text(
-                                  "Landmark :${querySnapshot.documents[i].data['position']['geopoint'].latitude.runtimeType}"),
+                              // Text(
+                              //     "Landmark :${querySnapshot.documents[i].data['position']['geopoint'].latitude.runtimeType}"),
                             ],
                           )),
                     ),
