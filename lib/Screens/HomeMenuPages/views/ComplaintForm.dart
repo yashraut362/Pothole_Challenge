@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import '../services/toast.dart';
 import '../services/focuschanger.dart';
+import 'dart:async';
 
 class ComplaintForm extends StatefulWidget {
   @override
@@ -110,9 +111,35 @@ class _ComplaintFormState extends State<ComplaintForm> {
               children: [
                 SizedBox(height: 20.0),
                 RaisedButton.icon(
+                    color: Colors.amber,
                     onPressed: _getImage,
-                    icon: Icon(Icons.add_a_photo),
-                    label: Text('Add Image')),
+                    icon: Icon(
+                      Icons.add_a_photo,
+                      color: Colors.white,
+                    ),
+                    label: Text(
+                      'Add Image',
+                      style: TextStyle(color: Colors.white),
+                    )),
+                SizedBox(height: 20.0),
+                Center(
+                  child: Builder(
+                    builder: (context) {
+                      if (image == null) {
+                        return Text(
+                          'Please choose an image',
+                          style: TextStyle(
+                              fontSize: 15.0, color: Colors.redAccent),
+                        );
+                      } else {
+                        return Text(
+                          'Image has been selected',
+                          style: TextStyle(fontSize: 15.0, color: Colors.green),
+                        );
+                      }
+                    },
+                  ),
+                ),
                 SizedBox(height: 20.0),
                 TextFormField(
                   focusNode: _potholetypeFocusNode,
@@ -352,6 +379,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
                   height: 20.0,
                 ),
                 TextFormField(
+                  focusNode: _phonenumFocusNode,
                   decoration: new InputDecoration(
                     labelText: "Enter your number",
                     border: new OutlineInputBorder(
@@ -377,14 +405,19 @@ class _ComplaintFormState extends State<ComplaintForm> {
                 ),
                 RaisedButton(
                   color: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
-                      toastMessage(
-                          "Username: $_username\nEmail: $_email\nPotholetype:$_potholetype\nDepartment:$_department\nAddress:$_address\nLandmark:$_landmark\nComment:$_comment\nPhoneno:$_phonenum");
+                  onPressed: () async {
+                    if (image == null) {
+                      toastMessage('Please Select an Image');
+                    } else {
+                      if (_formKey.currentState.validate()) {
+                        _formKey.currentState.save();
+                        toastMessage(
+                            "Thank You Your Response has been submitted");
+                        uploadform();
+                        await new Future.delayed(const Duration(seconds: 3));
+                        Navigator.pop(context);
+                      }
                     }
-                    uploadform();
-                    print("Yash");
                   },
                   child: Text(
                     "Submit",
