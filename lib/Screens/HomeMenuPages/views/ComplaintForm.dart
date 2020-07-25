@@ -1,8 +1,12 @@
+import 'dart:io';
+import 'package:path/path.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import '../services/toast.dart';
 import '../services/focuschanger.dart';
@@ -28,6 +32,42 @@ class _ComplaintFormState extends State<ComplaintForm> {
   Geoflutterfire geo = Geoflutterfire();
   Location location = new Location();
 
+  String _username,
+      _email,
+      _potholetype,
+      _department,
+      _address,
+      _landmark,
+      _comment;
+  int _phonenum;
+  bool _work = false;
+  String imageurl;
+  File image;
+  String filename;
+  final picker = ImagePicker();
+
+  Future _getImage() async {
+    var selectedImage =
+        await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      image = selectedImage;
+      filename = basename(image.path);
+    });
+    uploadImage();
+  }
+
+  Future<String> uploadImage() async {
+    StorageReference ref = FirebaseStorage.instance.ref().child(filename);
+    StorageUploadTask uploadTask = ref.putFile(image);
+
+    var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
+    var url = downUrl.toString();
+    setState(() {
+      imageurl = url;
+    });
+    print('url is $imageurl');
+  }
+
   void uploadform() async {
     var pos = await location.getLocation();
     GeoFirePoint point =
@@ -43,18 +83,9 @@ class _ComplaintFormState extends State<ComplaintForm> {
       'comment': _comment,
       'phonenum': _phonenum,
       'work': _work,
+      'imageurl': imageurl,
     });
   }
-
-  String _username,
-      _email,
-      _potholetype,
-      _department,
-      _address,
-      _landmark,
-      _comment;
-  int _phonenum;
-  bool _work = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +108,11 @@ class _ComplaintFormState extends State<ComplaintForm> {
             key: _formKey,
             child: Column(
               children: [
+                SizedBox(height: 20.0),
+                RaisedButton.icon(
+                    onPressed: _getImage,
+                    icon: Icon(Icons.add_a_photo),
+                    label: Text('Add Image')),
                 SizedBox(height: 20.0),
                 TextFormField(
                   focusNode: _potholetypeFocusNode,
