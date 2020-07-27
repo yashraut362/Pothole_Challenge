@@ -35,6 +35,7 @@ class _StatusListState extends State<StatusList> {
           String lon = querySnapshot
               .documents[i].data['position']['geopoint'].longitude
               .toString();
+          String downloadurl = querySnapshot.documents[i].data['imageurl'];
           return Padding(
             padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 0),
             child: Column(
@@ -55,8 +56,7 @@ class _StatusListState extends State<StatusList> {
                   subtitle: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                          "${querySnapshot.documents[i].data['department']}"),
+                      Text("${querySnapshot.documents[i].data['department']}"),
                     ],
                   ),
                   children: <Widget>[
@@ -120,7 +120,9 @@ class _StatusListState extends State<StatusList> {
                         FlatButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4.0)),
-                          onPressed: () {},
+                          onPressed: () {
+                            seepothole(downloadurl);
+                          },
                           child: Column(
                             children: <Widget>[
                               Icon(Icons.open_in_browser),
@@ -128,7 +130,7 @@ class _StatusListState extends State<StatusList> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 2.0),
                               ),
-                              Text('Open'),
+                              Text('See Pothole !'),
                             ],
                           ),
                         ),

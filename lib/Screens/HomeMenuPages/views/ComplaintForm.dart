@@ -1,11 +1,16 @@
+import 'dart:io';
+import 'package:path/path.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 import '../services/toast.dart';
 import '../services/focuschanger.dart';
+import 'dart:async';
 
 class ComplaintForm extends StatefulWidget {
   @override
@@ -28,6 +33,42 @@ class _ComplaintFormState extends State<ComplaintForm> {
   Geoflutterfire geo = Geoflutterfire();
   Location location = new Location();
 
+  String _username,
+      _email,
+      _potholetype,
+      _department,
+      _address,
+      _landmark,
+      _comment;
+  int _phonenum;
+  bool _work = false;
+  String imageurl;
+  File image;
+  String filename;
+  final picker = ImagePicker();
+
+  Future _getImage() async {
+    var selectedImage =
+        await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      image = selectedImage;
+      filename = basename(image.path);
+    });
+    uploadImage();
+  }
+
+  Future<String> uploadImage() async {
+    StorageReference ref = FirebaseStorage.instance.ref().child(filename);
+    StorageUploadTask uploadTask = ref.putFile(image);
+
+    var downUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
+    var url = downUrl.toString();
+    setState(() {
+      imageurl = url;
+    });
+    print('url is $imageurl');
+  }
+
   void uploadform() async {
     var pos = await location.getLocation();
     GeoFirePoint point =
@@ -43,18 +84,9 @@ class _ComplaintFormState extends State<ComplaintForm> {
       'comment': _comment,
       'phonenum': _phonenum,
       'work': _work,
+      'imageurl': imageurl,
     });
   }
-
-  String _username,
-      _email,
-      _potholetype,
-      _department,
-      _address,
-      _landmark,
-      _comment;
-  int _phonenum;
-  bool _work = false;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +109,37 @@ class _ComplaintFormState extends State<ComplaintForm> {
             key: _formKey,
             child: Column(
               children: [
+                SizedBox(height: 20.0),
+                RaisedButton.icon(
+                    color: Colors.amber,
+                    onPressed: _getImage,
+                    icon: Icon(
+                      Icons.add_a_photo,
+                      color: Colors.white,
+                    ),
+                    label: Text(
+                      'Add Image',
+                      style: TextStyle(color: Colors.white),
+                    )),
+                SizedBox(height: 20.0),
+                Center(
+                  child: Builder(
+                    builder: (context) {
+                      if (image == null) {
+                        return Text(
+                          'Please choose an image',
+                          style: TextStyle(
+                              fontSize: 15.0, color: Colors.redAccent),
+                        );
+                      } else {
+                        return Text(
+                          'Image has been selected',
+                          style: TextStyle(fontSize: 15.0, color: Colors.green),
+                        );
+                      }
+                    },
+                  ),
+                ),
                 SizedBox(height: 20.0),
                 TextFormField(
                   focusNode: _potholetypeFocusNode,
@@ -316,6 +379,7 @@ class _ComplaintFormState extends State<ComplaintForm> {
                   height: 20.0,
                 ),
                 TextFormField(
+                  focusNode: _phonenumFocusNode,
                   decoration: new InputDecoration(
                     labelText: "Enter your number",
                     border: new OutlineInputBorder(
@@ -341,14 +405,19 @@ class _ComplaintFormState extends State<ComplaintForm> {
                 ),
                 RaisedButton(
                   color: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
-                      toastMessage(
-                          "Username: $_username\nEmail: $_email\nPotholetype:$_potholetype\nDepartment:$_department\nAddress:$_address\nLandmark:$_landmark\nComment:$_comment\nPhoneno:$_phonenum");
+                  onPressed: () async {
+                    if (image == null) {
+                      toastMessage('Please Select an Image');
+                    } else {
+                      if (_formKey.currentState.validate()) {
+                        _formKey.currentState.save();
+                        toastMessage(
+                            "Thank You Your Response has been submitted");
+                        uploadform();
+                        await new Future.delayed(const Duration(seconds: 3));
+                        Navigator.pop(context);
+                      }
                     }
-                    uploadform();
-                    print("Yash");
                   },
                   child: Text(
                     "Submit",
