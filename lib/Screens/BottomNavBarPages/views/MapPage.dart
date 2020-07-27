@@ -17,6 +17,7 @@ class _MapPageState extends State<MapPage> {
   static LatLng _initialPosition;
   final Set<Marker> _markers = {};
   static LatLng _lastMapPosition = _initialPosition;
+  MapType _currentMapType = MapType.normal;
 
   @override
   void initState() {
@@ -40,8 +41,6 @@ class _MapPageState extends State<MapPage> {
       controller1.complete(controller);
     });
   }
-
-  MapType _currentMapType = MapType.normal;
 
   void _onMapTypeButtonPressed() {
     setState(() {
@@ -116,17 +115,14 @@ class _MapPageState extends State<MapPage> {
               child: Stack(
                 children: <Widget>[
                   GoogleMap(
-                    markers: _markers,
                     mapType: _currentMapType,
                     initialCameraPosition: CameraPosition(
                       target: _initialPosition,
                       zoom: 14.4746,
                     ),
                     onMapCreated: _onMapCreated,
-                    zoomGesturesEnabled: true,
                     onCameraMove: _onCameraMove,
                     myLocationEnabled: true,
-                    compassEnabled: true,
                     myLocationButtonEnabled: false,
                   ),
                   Align(
