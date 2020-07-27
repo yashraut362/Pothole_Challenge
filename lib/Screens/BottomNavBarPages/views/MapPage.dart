@@ -18,6 +18,7 @@ class _MapPageState extends State<MapPage> {
   final Set<Marker> _markers = {};
   static LatLng _lastMapPosition = _initialPosition;
   MapType _currentMapType = MapType.normal;
+  Completer<GoogleMapController> _controller = Completer();
 
   @override
   void initState() {
@@ -33,12 +34,6 @@ class _MapPageState extends State<MapPage> {
     setState(() {
       _initialPosition = LatLng(position.latitude, position.longitude);
       // print('${placemark[0].name}');
-    });
-  }
-
-  _onMapCreated(GoogleMapController controller) {
-    setState(() {
-      controller1.complete(controller);
     });
   }
 
@@ -67,6 +62,7 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
+    LatLng pinPosition = LatLng(19.4701694, -72.8000385);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -120,10 +116,14 @@ class _MapPageState extends State<MapPage> {
                       target: _initialPosition,
                       zoom: 14.4746,
                     ),
-                    onMapCreated: _onMapCreated,
                     onCameraMove: _onCameraMove,
                     myLocationEnabled: true,
                     myLocationButtonEnabled: false,
+                    markers: _markers,
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                      setState(() {});
+                    },
                   ),
                   Align(
                     alignment: Alignment.topRight,
