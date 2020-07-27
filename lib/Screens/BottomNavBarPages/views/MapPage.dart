@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -19,11 +20,18 @@ class _MapPageState extends State<MapPage> {
   static LatLng _lastMapPosition = _initialPosition;
   MapType _currentMapType = MapType.normal;
   Completer<GoogleMapController> _controller = Completer();
+  List<Placemark> placemark;
+  String _address;
+  Position position;
+  double _lat;
+  double _lng;
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
   @override
   void initState() {
     super.initState();
     _getUserLocation();
+    populateClients();
   }
 
   void _getUserLocation() async {
@@ -58,6 +66,60 @@ class _MapPageState extends State<MapPage> {
       fillColor: color,
       padding: const EdgeInsets.all(7.0),
     );
+  }
+
+  void getAddress(double latitude, double longitude) async {
+    placemark =
+        await Geolocator().placemarkFromCoordinates(latitude, longitude);
+    _address =
+        placemark[0].name.toString() + "," + placemark[0].locality.toString();
+  }
+
+  void getCurrentLocation() async {
+    Position res = await Geolocator().getCurrentPosition();
+    setState(() {
+      position = res;
+      _lat = position.latitude;
+      _lng = position.longitude;
+    });
+    await getAddress(_lat, _lng);
+  }
+
+  Set<Marker> _createMarker() {
+    return <Marker>[
+      Marker(
+        markerId: MarkerId("home"),
+        position: LatLng(position.latitude, position.longitude),
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
+      ),
+    ].toSet();
+  }
+
+  populateClients() {
+    Firestore.instance.collection('reports').getDocuments().then((docs) {
+      if (docs.documents.isNotEmpty) {
+        for (int i = 0; i < docs.documents.length; ++i) {
+          initMarker(docs.documents[i].data, docs.documents[i].documentID);
+        }
+      }
+    });
+  }
+
+  void initMarker(request, requestId) {
+    var markerIdVal = requestId;
+    final MarkerId markerId = MarkerId(markerIdVal);
+    // creating a new MARKER
+    final Marker marker = Marker(
+      markerId: markerId,
+      position: LatLng(request['position']['geopoint'].latitude,
+          request['position']['geopoint'].longitude),
+      infoWindow: InfoWindow(
+          title: request['potholetype'], snippet: request['address']),
+    );
+    setState(() {
+      markers[markerId] = marker;
+      print(markerId);
+    });
   }
 
   @override
@@ -119,10 +181,9 @@ class _MapPageState extends State<MapPage> {
                     onCameraMove: _onCameraMove,
                     myLocationEnabled: true,
                     myLocationButtonEnabled: false,
-                    markers: _markers,
+                    markers: Set<Marker>.of(markers.values),
                     onMapCreated: (GoogleMapController controller) {
                       _controller.complete(controller);
-                      setState(() {});
                     },
                   ),
                   Align(
