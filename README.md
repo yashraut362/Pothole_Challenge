@@ -1,16 +1,19 @@
-# pothole
+# Pothole Detection and Report System 🕳️
 
-A new Flutter project.
+Hybrid mobile app for reporting pothole from your cities to government authorities. consist of Object detection(Yolo v3 model) Pothole detection model. which finds pothole and captures pothole images from the camera of your device and offers a seamless experience of reporting with a single tap ! also implemented google maps for routing and see nearby complaints of citizens!
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+###Technology stack ⚡:- 
+Flutter, Firebase, Geolocation, Google maps API, Tensorflow! 
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+###Screenshots
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+
+
+###✨The app is currently in the development phase!
+##### Ohh ! You Made it Till Here ! If you liked my work, don’t forget to ⭐ star the repo to show your support.
